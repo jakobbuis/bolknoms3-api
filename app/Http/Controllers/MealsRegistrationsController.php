@@ -20,17 +20,6 @@ class MealsRegistrationsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @param  \App\Meal  $meal
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Meal $meal)
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -50,18 +39,6 @@ class MealsRegistrationsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Meal $meal, Registration $registration)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Meal  $meal
-     * @param  \App\Registration  $registration
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Meal $meal, Registration $registration)
     {
         //
     }
