@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Registration;
-use App\Meal;
+use App\Models\Registration;
+use App\Models\Meal;
 use Illuminate\Http\Request;
 
 class MealsRegistrationsController extends Controller
