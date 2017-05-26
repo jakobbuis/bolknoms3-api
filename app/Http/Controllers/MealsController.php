@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Transformers\MealTransformer;
 use App\Models\Meal;
 use Illuminate\Http\Request;
+use League\Fractal\Manager;
+use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 
 class MealsController extends Controller
 {
@@ -14,7 +18,7 @@ class MealsController extends Controller
      */
     public function index()
     {
-        //
+        return $this->respondWith(Meal::all());
     }
 
     /**
@@ -36,7 +40,7 @@ class MealsController extends Controller
      */
     public function show(Meal $meal)
     {
-        //
+        return $this->respondWith($meal);
     }
 
     /**

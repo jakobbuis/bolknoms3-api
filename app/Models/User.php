@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class User extends Model
 {
+    /**
+     * The transformer for this model
+     * @return TransformerAbstract
+     */
+    public function getTransformer()
+    {
+        return new \App\Http\Transformers\UserTransformer();
+    }
+
     /**
      * A User can have registrations for meals
      * @return Relations\HasMany

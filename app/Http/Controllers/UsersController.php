@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Transformers\UserTransformer;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        return $this->respondWith(User::all);
     }
 
     /**
@@ -25,7 +26,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return $this->respondWith($user);
     }
 
     /**

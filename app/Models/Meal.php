@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Meal extends Model
 {
     protected $fillable = ['event', 'promoted', 'meal_timestamp', 'locked_timestamp'];
     protected $dates = ['created_at', 'updated_at', 'deleted_at', 'meal_timestamp', 'locked_timestamp'];
+
+    public function getTransformer()
+    {
+        return new \App\Http\Transformers\MealTransformer;
+    }
 
     /**
      * Relationship: one meal has many registrations
