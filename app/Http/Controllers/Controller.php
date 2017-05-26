@@ -22,7 +22,7 @@ class Controller extends BaseController
         $this->fractal = $fractal;
     }
 
-    protected function respondWith(Model $data)
+    protected function respondWith($data)
     {
         if ($data instanceof \Illuminate\Database\Eloquent\Collection) {
             $transformer = $data->first()->getTransformer();

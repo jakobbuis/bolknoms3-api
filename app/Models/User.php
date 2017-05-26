@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Http\Transformers\UserTransformer;
+
 class User extends Model
 {
     /**
@@ -10,7 +12,7 @@ class User extends Model
      */
     public function getTransformer()
     {
-        return new \App\Http\Transformers\UserTransformer();
+        return new UserTransformer();
     }
 
     /**

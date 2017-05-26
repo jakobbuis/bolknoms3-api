@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Http\Transformers\MealTransformer;
+
 class Meal extends Model
 {
     protected $fillable = ['event', 'promoted', 'meal_timestamp', 'locked_timestamp'];
@@ -9,7 +11,7 @@ class Meal extends Model
 
     public function getTransformer()
     {
-        return new \App\Http\Transformers\MealTransformer;
+        return new MealTransformer;
     }
 
     /**

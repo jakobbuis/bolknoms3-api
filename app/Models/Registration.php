@@ -2,9 +2,16 @@
 
 namespace App\Models;
 
+use App\Http\Transformers\RegistrationTransformer;
+
 class Registration extends Model
 {
     protected $fillable = ['name', 'email', 'handicap'];
+
+    public function getTransformer()
+    {
+        return new RegistrationTransformer;
+    }
 
     /**
      * A registration belongs to a meal

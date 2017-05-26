@@ -6,7 +6,7 @@ use App\Models\Registration;
 use App\Models\Meal;
 use Illuminate\Http\Request;
 
-class MealsRegistrationsController extends Controller
+class MealRegistrationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class MealsRegistrationsController extends Controller
      */
     public function index(Meal $meal)
     {
-        //
+        return $this->respondWith($meal->registrations);
     }
 
     /**
@@ -40,7 +40,7 @@ class MealsRegistrationsController extends Controller
      */
     public function show(Meal $meal, Registration $registration)
     {
-        //
+        $this->respondWith($registration);
     }
 
     /**
