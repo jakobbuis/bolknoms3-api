@@ -6,6 +6,8 @@ use App\Models\User;
 
 class UserTransformer extends \League\Fractal\TransformerAbstract
 {
+    protected $availableIncludes = ['registrations'];
+
     public function transform(User $user)
     {
         return [
@@ -16,5 +18,11 @@ class UserTransformer extends \League\Fractal\TransformerAbstract
             'blocked' => $user->blocked,
             'email' => $user->email,
         ];
+    }
+
+    public function includeRegistrations(User $user)
+    {
+        $registrations = $user->registrations;
+        return $this->collection($registrations, $registrations->first()->getTransformer());
     }
 }

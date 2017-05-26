@@ -40,7 +40,7 @@ class MealRegistrationsController extends Controller
      */
     public function show(Meal $meal, Registration $registration)
     {
-        $this->respondWith($registration);
+        return $this->respondWith($registration);
     }
 
     /**

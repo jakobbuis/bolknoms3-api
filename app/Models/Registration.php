@@ -32,6 +32,15 @@ class Registration extends Model
     }
 
     /**
+     * A registratino is created by a user
+     * @return Relations\BelongsTo
+     */
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
      * Scope: all confirmed registrations
      */
     public function scopeConfirmed($query)
