@@ -60,6 +60,6 @@ class FixDateColumns extends Migration
      */
     public function down()
     {
-        //
+        throw new \Exception('2017_05_25_133331_fix_date_columns cannot be reversed');
     }
 }
