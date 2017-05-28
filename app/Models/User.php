@@ -6,6 +6,8 @@ use App\Http\Transformers\UserTransformer;
 
 class User extends Model
 {
+    protected $fillable = ['handicap', 'blocked'];
+
     /**
      * The transformer for this model
      * @return TransformerAbstract
