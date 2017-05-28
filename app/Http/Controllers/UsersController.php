@@ -38,16 +38,26 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $this->oauth->mustBeMember();
-        $data = $request->only('diet', 'blocked');
-        if (sizeof($request->all()) !== sizeof($data)) {
-            throw new ApiError(400, 'invalid_parameter', 'Can only send diet and blocked parameters.');
+        // Users can only update themselves
+        if (!$this->oauth->isMember() || $this->oauth->username() !== $user->username) {
+            throw new ApiError(403, 'oauth_insufficient_authorization',
+                                    'You must be a board member to change other users');
         }
 
-        if ($data->blocked) {
-            $this->oauth->mustBeBoard();
+        if (isset($request->diet)) {
+            $user->diet = $request->diet;
         }
 
-        return 'check back soon';
+        // Only board members can (un)block users
+        if (isset($request->blocked)) {
+            if (!$this->oauth->isBoard()) {
+                throw new ApiError(403, 'oauth_insufficient_authorization',
+                                        'You must be a board member to (un)block a user');
+            }
+            $user->blocked = !!$request->blocked;
+        }
+
+        $user->save();
+        return $this->respondWith($user);
     }
 }
