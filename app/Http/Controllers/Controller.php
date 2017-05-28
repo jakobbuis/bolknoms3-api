@@ -26,6 +26,11 @@ class Controller extends BaseController
         }
     }
 
+    /**
+     * Return a formatted JSON response
+     * @param  object $data
+     * @return Illuminate\Http\Response
+     */
     protected function respondWith($data)
     {
         if ($data instanceof \Illuminate\Database\Eloquent\Collection) {
@@ -37,8 +42,6 @@ class Controller extends BaseController
             $resource = new Item($data, $transformer);
         }
 
-        return response($this->fractal->createData($resource)->toJson())
-                ->header('Content-Type', 'application/json')
-                ->header('X-Api-Version', '1.0.0');
+        return response()->json($this->fractal->createData($resource));
     }
 }
