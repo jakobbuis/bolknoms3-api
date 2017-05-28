@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\OAuth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -16,13 +17,15 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     private $fractal;
+    protected $oauth;
 
-    public function __construct(Manager $fractal, Request $request)
+    public function __construct(Manager $fractal, Request $request, OAuth $oauth)
     {
         $this->fractal = $fractal;
         if (!empty($request->include)) {
             $this->fractal->parseIncludes($request->include);
         }
+        $this->oauth = $oauth;
     }
 
     /**

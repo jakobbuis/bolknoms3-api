@@ -38,9 +38,14 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->oauth->mustBeMember();
         $data = $request->only('diet', 'blocked');
         if (sizeof($request->all()) !== sizeof($data)) {
             throw new ApiError(400, 'invalid_parameter', 'Can only send diet and blocked parameters.');
+        }
+
+        if ($data->blocked) {
+            $this->oauth->mustBeBoard();
         }
 
         return 'check back soon';
