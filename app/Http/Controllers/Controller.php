@@ -42,6 +42,8 @@ class Controller extends BaseController
             $resource = new Item($data, $transformer);
         }
 
-        return response()->json($this->fractal->createData($resource));
+        return response($this->fractal->createData($resource)->toJson(), 200, [
+            'Content-Type' => 'application/json',
+        ]);
     }
 }
