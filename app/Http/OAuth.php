@@ -8,25 +8,23 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
-use Illuminate\Log\Writer;
+use Illuminate\Support\Facades\Log;
 
 class OAuth
 {
     const LEVEL_NONE = 'none';
-    const LEVEL_MEMBER = 'lid';
+    const LEVEL_MEMBER = 'bekend';
     const LEVEL_BOARD = 'bestuur';
 
     private $accessToken;
     private $token;
     private $guzzle;
     private $request;
-    private $log;
 
-    public function __construct(Client $guzzle, Request $request, Writer $log)
+    public function __construct(Client $guzzle, Request $request)
     {
         $this->guzzle = $guzzle;
         $this->request = $request;
-        $this->log = $log;
     }
 
     /**
@@ -52,39 +50,42 @@ class OAuth
 
     /**
      * Whether the token has board level authorisation
-     * @throws ApiError
+     * @return boolean
      */
-    public function mustBeBoard()
+    public function isBoard()
     {
         $this->mustBeFresh();
-
-        if (!$this->isLevel(self::LEVEL_BOARD)) {
-            throw new ApiError(403, 'oauth_insufficient_authorization',
-                                    'You must be a board member to do this');
-        }
+        return $this->isLevel(self::LEVEL_BOARD);
     }
 
     /**
      * Whether the token has member level authorisatino
-     * @throws ApiError
+     * @return boolean
      */
-    public function mustBeMember()
+    public function isMember()
     {
         $this->mustBeFresh();
-        if (!$this->isLevel(self::LEVEL_MEMBER) || !$this->isLevel(self::LEVEL_BOARD)) {
-            throw new ApiError(403, 'oauth_insufficient_authorization',
-                                    'You must be a (board) member to do this');
-        }
+        return $this->isLevel(self::LEVEL_MEMBER);
+    }
+
+    /**
+     * The username of the current token
+     * @return [type] [description]
+     */
+    public function username()
+    {
+        $this->mustBeFresh();
+        return $this->token->user_id;
     }
 
     /**
      * Whether the token is a specific level
      * @param  string  $level
-     * @throws ApiError
+     * @return boolean
      */
     private function isLevel($level)
     {
-        return $this->getResource($level)->getStatusCode() === '200';
+        return $this->getResource($level)->getStatusCode() === 200;
     }
 
     /**
@@ -134,12 +135,12 @@ class OAuth
                 'timeout' => 2,
             ]);
         } catch(RequestException $e) {
-            $this->log->error('Cannot retrieve OAuth data', [
+            Log::error('Cannot retrieve OAuth data', [
                 'request' => (string) $e->getRequest()->getBody(),
                 'response' => ($e->hasResponse() ? (string) $e->getResponse()->getBody() : 'none'),
             ]);
-        } catch (GuzzleException $e) {
-            $this->log->error('Cannot retrieve OAuth data', [
+        } catch (\Exception $e) {
+            Log::error('Cannot retrieve OAuth data', [
                 'request' => 'error in transferring request',
                 'response' => 'none',
             ]);
