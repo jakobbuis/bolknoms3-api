@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ApiError;
 use App\Http\Transformers\UserTransformer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,6 +39,11 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $data = $request->only('diet', 'blocked');
+        if (sizeof($request->all()) !== sizeof($data)) {
+            throw new ApiError(400, 'invalid_parameter', 'Can only send diet and blocked parameters.');
+        }
+
+        return 'check back soon';
     }
 }
