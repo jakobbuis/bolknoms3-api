@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ApiError;
-use App\Http\Transformers\UserTransformer;
 use App\Models\User;
 use Illuminate\Http\Request;
 

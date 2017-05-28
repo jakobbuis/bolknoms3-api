@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
-use League\Fractal\TransformerAbstract;
 
 class Controller extends BaseController
 {
