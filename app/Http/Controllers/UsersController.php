@@ -15,7 +15,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return $this->respondWith(User::all);
+        return $this->respondWith(User::all());
     }
 
     /**
