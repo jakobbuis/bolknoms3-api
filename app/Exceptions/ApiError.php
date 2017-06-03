@@ -4,15 +4,15 @@ namespace App\Exceptions;
 
 class ApiError extends \Exception
 {
-    protected $code;
+    protected $errorId;
     private $description;
     private $httpStatus;
 
-    public function __construct($httpStatus, $code, $description)
+    public function __construct($httpStatus, $errorId, $description)
     {
-        parent::__construct($code, $httpStatus, null);
+        parent::__construct($errorId, 0, null);
 
-        $this->code = $code;
+        $this->errorId = $errorId;
         $this->description = $description;
         $this->httpStatus = $httpStatus;
     }
@@ -21,9 +21,9 @@ class ApiError extends \Exception
     {
         return [
             'errors' => [
-                'code' => $this->code,
+                'code' => $this->errorId,
                 'description' => $this->description,
-                'href' => env('ERROR_DOCS_URL') . $this->code,
+                'href' => env('ERROR_DOCS_URL') . $this->errorId,
             ],
         ];
     }
@@ -35,6 +35,6 @@ class ApiError extends \Exception
 
     public function __toString()
     {
-        return "{$this->httpStatus} {$this->code}: {$this->description}";
+        return "{$this->httpStatus} {$this->errorId}: {$this->description}";
     }
 }
