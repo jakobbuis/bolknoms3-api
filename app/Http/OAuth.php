@@ -70,7 +70,7 @@ class OAuth
 
     /**
      * The username of the current token
-     * @return [type] [description]
+     * @return string
      */
     public function username()
     {
