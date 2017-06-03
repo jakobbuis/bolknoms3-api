@@ -69,13 +69,13 @@ class OAuth
     }
 
     /**
-     * The username of the current token
-     * @return string
+     * The user of the current token
+     * @return App\Models\User
      */
-    public function username()
+    public function user()
     {
         $this->mustBeFresh();
-        return $this->token->user_id;
+        return \App\Models\User::where('username', $this->token->user_id)->first();
     }
 
     /**

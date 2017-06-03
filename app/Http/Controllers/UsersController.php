@@ -39,10 +39,7 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         // Users can only update themselves
-        if (!$this->oauth->isMember() || $this->oauth->username() !== $user->username) {
-            throw new ApiError(403, 'oauth_insufficient_authorization',
-                                    'You must be a board member to change other users');
-        }
+        $this->clientMustOwn($user, 'You must be a board member to change other users');
 
         if (isset($request->diet)) {
             $user->diet = $request->diet;
