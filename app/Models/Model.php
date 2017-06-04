@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Ramsey\Uuid\Uuid;
 
 abstract class Model extends \Illuminate\Database\Eloquent\Model
 {
@@ -17,4 +18,18 @@ abstract class Model extends \Illuminate\Database\Eloquent\Model
      * @return \League\Fractal\TransformerAbstract
      */
     abstract function getTransformer();
+
+    /*
+     * Models use UUIDs for the their primary key
+     */
+    public $incrementing = false;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->{$model->getKeyName()} = Uuid::uuid4();
+        });
+    }
 }
