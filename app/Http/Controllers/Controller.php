@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\OAuth;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -94,7 +95,7 @@ class Controller extends BaseController
         }
 
         $user = $this->oauth->user();
-        if ($model instanceof User::class) {
+        if ($model instanceof User) {
             if ($model->id !== $user->id) {
                 throw $errror;
             }
