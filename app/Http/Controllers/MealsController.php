@@ -59,6 +59,17 @@ class MealsController extends Controller
      */
     public function destroy(Meal $meal)
     {
-        //
+        $this->clientMustBeBoard('Only board members can remove meals');
+
+        // Email and remove all guests
+        $this->meal->registrations->each(function($registration){
+            Mail::send(new MealCancelled($meal, $registration));
+            $registration->delete();
+        });
+
+        $meal->delete();
+        Log::info('Maaltijd {$meal->id} verwijderd door {$this->oauth->user()->id}');
+
+        return response(null, 204);
     }
 }
