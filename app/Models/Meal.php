@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Transformers\MealTransformer;
+use Carbon\Carbon;
 
 class Meal extends Model
 {
@@ -56,5 +57,43 @@ class Meal extends Model
     public function open_for_registrations()
     {
       return $this->locked_timestamp->timestamp > time();
+    }
+
+    /**
+     * Virtual attribute to format the date of meal consistently.
+     * Prints the Dutch-formatted date, adding the time if not standard
+     * @return string formatted date, and time if needed
+     */
+    public function getHumanDateAttribute()
+    {
+        return $this->humanFormatDate($this->meal_timestamp, '18:30');
+    }
+
+    /**
+     * Virtual attribute to format the deadline of meal consistently.
+     * Prints the Dutch-formatted date, adding the time if not standard
+     * @return string formatted date, and time if needed
+     */
+    public function getHumanDeadlineAttribute()
+    {
+        return $this->humanFormatDate($this->locked_timestamp, '15:00');
+    }
+
+    /**
+     * Utility function to format human-readable date
+     * @param  Carbon $date
+     * @param  string $defaultTime
+     * @return string
+     */
+    private function humanFormatDate(Carbon $date, string $defaultTime)
+    {
+        $format = '%A %d %B %Y';
+
+        // If the time is not default, i.e. 18:30, we add it for clarity
+        if ($date->format('H:i') !== $defaultTime) {
+            $format .= ' %R uur';
+        }
+
+        return $date->formatLocalized($format);
     }
 }
