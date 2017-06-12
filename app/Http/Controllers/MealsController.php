@@ -66,7 +66,9 @@ class MealsController extends Controller
 
         // Email and remove all guests
         $meal->registrations->each(function($registration) use ($meal) {
-            Mail::send(new MealCancelled($meal, $registration));
+            if ($registration->email) {
+                Mail::send(new MealCancelled($meal, $registration));
+            }
             $registration->delete();
         });
 
