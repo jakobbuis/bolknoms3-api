@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\MealCancelled;
 use App\Models\Meal;
-use Illuminate\Contracts\Logging\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class MealsController extends Controller
