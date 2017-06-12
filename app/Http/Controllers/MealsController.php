@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MealCancelled;
 use App\Models\Meal;
+use Illuminate\Contracts\Logging\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class MealsController extends Controller
 {
@@ -62,7 +65,7 @@ class MealsController extends Controller
         $this->clientMustBeBoard('Only board members can remove meals');
 
         // Email and remove all guests
-        $this->meal->registrations->each(function($registration){
+        $meal->registrations->each(function($registration) use ($meal) {
             Mail::send(new MealCancelled($meal, $registration));
             $registration->delete();
         });

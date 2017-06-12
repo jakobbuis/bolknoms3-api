@@ -21,8 +21,6 @@ class MealCancelled extends Mailable
 
     public function __construct(Meal $meal, Registration $registration)
     {
-        parent::__construct();
-
         $this->meal = $meal;
         $this->registration = $registration;
     }
@@ -30,7 +28,8 @@ class MealCancelled extends Mailable
     public function build()
     {
         return $this->to($this->registration->email)
-                    ->view('emails/meal_cancelled.blade.html')
-                    ->text('emails/meal_cancelled.blade.txt');
+                    ->subject("Maaltijd {$this->meal->humanDate} gaat niet door")
+                    ->view('mail/meal_cancelled/html')
+                    ->text('mail/meal_cancelled/text');
     }
 }
