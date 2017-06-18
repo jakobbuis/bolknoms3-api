@@ -11,7 +11,7 @@ class DocsController extends Controller
     /**
      * Render a page of the API documentation
      */
-    public function page($slug = 'introduction')
+    public function page($slug)
     {
         $path = "docs/pages/{$slug}";
         if (!View::exists($path)) {
