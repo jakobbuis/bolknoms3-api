@@ -106,7 +106,7 @@ class Controller extends BaseController
             if (!method_exists($model, 'user')) {
                 throw new \Exception("$model cannot be owned by a user, i.e. it has no user() relationship");
             }
-            if ($model->user->id !== $currentUser->id) {
+            if ($model->user->id === $currentUser->id) {
                 return;
             }
         }
