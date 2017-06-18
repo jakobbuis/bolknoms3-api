@@ -102,7 +102,10 @@ class Controller extends BaseController
             }
         }
         else {
-            // Ownership is set through the user() relationship
+            // Ownership is set through the user() relationship, which must exist
+            if (!method_exists($model, 'user')) {
+                throw new \Exception("$model cannot be owned by a user, i.e. it has no user() relationship");
+            }
             if ($model->user->id !== $currentUser->id) {
                 return;
             }
