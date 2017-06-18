@@ -20,6 +20,6 @@
 
     <h2>Getting started</h2>
     <p>
-        To get started with your first application, start with reading the topics in the menu under Getting Started. These will give you a firm grasp on what you need for your first application. Your first major hurdle is <a href="/docs/working-with-oauth">getting a valid OAuth token</a>, refreshing it, etc. Once you have that, you can experiment with the endpoints under Reference to see what you can see and change in Bolknoms.
+        To get started with your first application, start with reading the topics in the menu under Getting Started. These will give you a firm grasp on what you need for your first application. Your first major hurdle is <a href="/docs/working-with-oauth">getting a valid OAuth token</a>, refreshing it, etc. Once you have that, try building one of the examples included in this documentation.
     </p>
 @endsection
