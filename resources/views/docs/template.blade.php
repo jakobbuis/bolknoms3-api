@@ -29,28 +29,28 @@
             <aside class="column is-3">
                 <nav class="menu">
                     <ul class="menu-list">
-                        <li><a href="/">Introduction</a></li>
-                        <li><a>Working with OAuth</a></li>
-                        <li><a>Authorisation</a></li>
-                        <li><a>E-mails</a></li>
+                        <li><a href="/docs/introduction">Introduction</a></li>
+                        <li><a href="/docs/working-with-oauth">Working with OAuth</a></li>
+                        <li><a href="/docs/authorisation">Authorisation</a></li>
+                        <li><a href="/docs/emails">E-mails</a></li>
                     </ul>
 
                     <p class="menu-label">
                         Reference
                     </p>
                     <ul class="menu-list">
-                        <li><a>Meals</a></li>
-                        <li><a>Registrations</a></li>
-                        <li><a>Users</a></li>
+                        <li><a href="/docs/meals">Meals</a></li>
+                        <li><a href="/docs/registrations">Registrations</a></li>
+                        <li><a href="/docs/users">Users</a></li>
                     </ul>
 
                     <p class="menu-label">
                         Examples
                     </p>
                     <ul class="menu-list">
-                        <li><a>See all open meals</a></li>
-                        <li><a>Get the next meal</a></li>
-                        <li><a>Register for a meal</a></li>
+                        <li><a href="/docs/see-all-open-meals">See all open meals</a></li>
+                        <li><a href="/docs/get-the-next-meal">Get the next meal</a></li>
+                        <li><a href="/docs/register-for-a-meal">Register for a meal</a></li>
                     </ul>
                 </nav>
             </aside>
