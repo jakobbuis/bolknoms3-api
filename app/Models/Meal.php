@@ -65,7 +65,7 @@ class Meal extends Model
      */
     public function getMealDateAttribute()
     {
-        return $this->meal_timestamp->format('%A %d %B %Y');
+        return $this->meal_timestamp->formatLocalized('%A %d %B %Y');
     }
 
     /**
@@ -74,7 +74,7 @@ class Meal extends Model
      */
     public function getMealTimeAttribute()
     {
-        return $this->meal_timestamp->format('%R');
+        return $this->meal_timestamp->formatLocalized('%R');
     }
 
     /**
@@ -83,7 +83,7 @@ class Meal extends Model
      */
     public function getDeadlineDateAttribute()
     {
-        return $this->locked_timestamp->format('%A %d %B %Y');
+        return $this->locked_timestamp->formatLocalized('%A %d %B %Y');
     }
 
     /**
@@ -92,6 +92,6 @@ class Meal extends Model
      */
     public function getDeadlineTimeAttribute()
     {
-        return $this->locked_timestamp->format('%R');
+        return $this->locked_timestamp->formatLocalized('%R');
     }
 }
