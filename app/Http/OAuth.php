@@ -5,8 +5,10 @@ namespace App\Http;
 use App\Exceptions\ApiError;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\TransferException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -40,7 +42,7 @@ class OAuth
         // Sanity check that the token actually expires
         if (empty($this->token->expires)) {
             throw new ApiError(400, 'oauth_token_invalid',
-                                    'Your token is invalid: tokens must have an expires value');
+                'Your token is invalid: tokens must have an expires value');
         }
 
         if (Carbon::now() > new Carbon($this->token->expires)) {
@@ -85,7 +87,19 @@ class OAuth
      */
     private function isLevel($level)
     {
-        return $this->getResource($level)->getStatusCode() === 200;
+        try {
+            return $this->getResource($level)->getStatusCode() === 200;
+        }
+        catch (BadResponseException $e) {
+        }
+        catch(TransferException $e) {
+            Log::error('Cannot retrieve OAuth data', [
+                'request' => (string) $e->getRequest()->getBody(),
+                'response' => ($e->hasResponse() ? (string) $e->getResponse()->getBody() : 'none'),
+            ]);
+        }
+
+        return false;
     }
 
     /**
@@ -98,7 +112,7 @@ class OAuth
 
         if ($authorization === null) {
             throw new ApiError(400, 'oauth_header_missing',
-                                    'Must send an Authorization header');
+                'Must send an Authorization header');
         }
 
         $parts = explode(" ", $authorization);
@@ -116,37 +130,47 @@ class OAuth
      */
     private function getFullToken()
     {
-        $this->parseHeader();
-        $response = $this->getResource('resource');
-        $this->token = json_decode((string) $response->getBody());
+        try {
+            $this->parseHeader();
+            $response = $this->getResource('resource');
+            $this->token = json_decode((string) $response->getBody());
+        }
+        catch(BadResponseException $e){
+            if ($e->hasResponse()) {
+                $body = json_decode((string) $e->getResponse()->getBody());
+                if ($body->error === 'expired_token') {
+                    throw new ApiError(400, 'oauth_token_expired', 'Your token has expired');
+                }
+                else {
+                    throw new ApiError(400, 'oauth_token_invalid', 'Your token is invalid');
+                }
+            }
+
+            throw new ApiError(502, 'oauth_authorization_server_wrong',
+                'Your token produced an invalid response from the OAuth Authorization server');
+        }
+        catch (TransferException $e) {
+            Log::error('Cannot retrieve OAuth data', [
+                'request' => (string) $e->getRequest()->getBody(),
+                'response' => ($e->hasResponse() ? (string) $e->getResponse()->getBody() : 'none'),
+            ]);
+
+            throw new ApiError(502, 'oauth_authorization_server_wrong',
+                'Your token produced an invalid response from the OAuth Authorization server');
+        }
     }
 
     /**
      * Get a resource from the authorization server
      * @param  string $resource
-     * @throws ApiError when the authorization server is unreachable
+     * @throws TransferException
      * @return GuzzleHttp\Psr7\Response
      */
     private function getResource($resource)
     {
-        try {
-            return $this->guzzle->request('GET', env('OAUTH_AUTHORIZATION') . $resource, [
-                'query' => ['access_token' => $this->accessToken],
-                'timeout' => 2,
-            ]);
-        } catch(RequestException $e) {
-            Log::error('Cannot retrieve OAuth data', [
-                'request' => (string) $e->getRequest()->getBody(),
-                'response' => ($e->hasResponse() ? (string) $e->getResponse()->getBody() : 'none'),
-            ]);
-        } catch (\Exception $e) {
-            Log::error('Cannot retrieve OAuth data', [
-                'request' => 'error in transferring request',
-                'response' => 'none',
-            ]);
-        }
-
-        throw new ApiError(502, 'oauth_authorization_unreachable',
-                                'Cannot contact the authorization server');
+        return $this->guzzle->request('GET', env('OAUTH_AUTHORIZATION') . $resource, [
+            'query' => ['access_token' => $this->accessToken],
+            'timeout' => 2,
+        ]);
     }
 }
