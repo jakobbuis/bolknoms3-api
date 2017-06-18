@@ -94,16 +94,20 @@ class Controller extends BaseController
             throw $error;
         }
 
-        $user = $this->oauth->user();
+        $currentUser = $this->oauth->user();
         if ($model instanceof User) {
-            if ($model->id !== $user->id) {
-                throw $errror;
+            // Members own only themselves
+            if ($model->id === $currentUser->id) {
+                return;
             }
         }
         else {
-            if ($model->user->id !== $this->id) {
-                throw $error;
+            // Ownership is set through the user() relationship
+            if ($model->user->id !== $currentUser->id) {
+                return;
             }
         }
+
+        throw $error;
     }
 }
