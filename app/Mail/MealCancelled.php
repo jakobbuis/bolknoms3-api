@@ -28,7 +28,7 @@ class MealCancelled extends Mailable
     public function build()
     {
         return $this->to($this->registration->email)
-                    ->subject("Maaltijd {$this->meal->humanDate} gaat niet door")
+                    ->subject("Maaltijd {$this->meal->mealDate} gaat niet door")
                     ->view('mail/meal_cancelled/html')
                     ->text('mail/meal_cancelled/text');
     }

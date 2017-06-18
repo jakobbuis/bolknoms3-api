@@ -60,40 +60,38 @@ class Meal extends Model
     }
 
     /**
-     * Virtual attribute to format the date of meal consistently.
-     * Prints the Dutch-formatted date, adding the time if not standard
-     * @return string formatted date, and time if needed
+     * Virtual attribute localised date of meal
+     * @return string Dutch-formatted date
      */
-    public function getHumanDateAttribute()
+    public function getMealDateAttribute()
     {
-        return $this->humanFormatDate($this->meal_timestamp, '18:30');
+        return $this->meal_timestamp->format('%A %d %B %Y');
     }
 
     /**
-     * Virtual attribute to format the deadline of meal consistently.
-     * Prints the Dutch-formatted date, adding the time if not standard
-     * @return string formatted date, and time if needed
+     * Virtual attribute localised time of meal
+     * @return string Dutch-formatted time
      */
-    public function getHumanDeadlineAttribute()
+    public function getMealTimeAttribute()
     {
-        return $this->humanFormatDate($this->locked_timestamp, '15:00');
+        return $this->meal_timestamp->format('%R');
     }
 
     /**
-     * Utility function to format human-readable date
-     * @param  Carbon $date
-     * @param  string $defaultTime
-     * @return string
+     * Virtual attribute localised deadline date of meal
+     * @return string Dutch-formatted date
      */
-    private function humanFormatDate(Carbon $date, string $defaultTime)
+    public function getDeadlineDateAttribute()
     {
-        $format = '%A %d %B %Y';
+        return $this->locked_timestamp->format('%A %d %B %Y');
+    }
 
-        // If the time is not default, i.e. 18:30, we add it for clarity
-        if ($date->format('H:i') !== $defaultTime) {
-            $format .= ' %R uur';
-        }
-
-        return $date->formatLocalized($format);
+    /**
+     * Virtual attribute localised deadline time of meal
+     * @return string Dutch-formatted date
+     */
+    public function getDeadlineTimeAttribute()
+    {
+        return $this->locked_timestamp->format('%R');
     }
 }
