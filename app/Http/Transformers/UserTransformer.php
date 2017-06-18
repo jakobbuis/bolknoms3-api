@@ -16,7 +16,6 @@ class UserTransformer extends \League\Fractal\TransformerAbstract
             'diet' => $user->handicap,
             'name' => $user->name,
             'blocked' => $user->blocked,
-            'email' => $user->email,
         ];
     }
 
