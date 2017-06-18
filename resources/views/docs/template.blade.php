@@ -35,6 +35,7 @@
                     @include('docs/_menu', ['path' => 'docs/working-with-oauth', 'title' => 'Working with OAuth'])
                     @include('docs/_menu', ['path' => 'docs/authorisation', 'title' => 'Authorisation'])
                     @include('docs/_menu', ['path' => 'docs/emails', 'title' => 'E-mails'])
+                    @include('docs/_menu', ['path' => 'docs/data-model', 'title' => 'Data model'])
                 </ul>
 
                 <p class="menu-label">

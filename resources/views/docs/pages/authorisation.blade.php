@@ -18,7 +18,7 @@
         <li><strong>none</strong> All other users</li>
     </ul>
     <p>
-        These levels are additive: members are allowed to do anything a "none"-user will, board-members are allowed to do anything a member is, etc. Normally, your level will be "member". Your authorisation level is retrieved from the <a href="https://auth.debolk.nl">Bolklogin OAuth authorisation server</a> (and beyond that, from <a href="http://gosa.i.bolkhuis.nl">Gosa</a>), and cannot be changed in Bolknoms.
+        Normally, your level will be "member". Your authorisation level is retrieved from the <a href="https://auth.debolk.nl">Bolklogin OAuth authorisation server</a> (and beyond that, from <a href="http://gosa.i.bolkhuis.nl">Gosa</a>), and cannot be changed in Bolknoms.
     </p>
     <p class="notification is-warning">
         <strong>Caution:</strong> Bolknoms user levels are similar to
@@ -26,7 +26,7 @@
         not completely equivalent. For example, the OAuth level "member" does not include candidate members, but Bolknoms' member-level does include them.
     </p>
     <p>
-        Board members have very wide-ranging privileges in Bolknoms: they may see and change basically anything. They are also exempt from most business rules: a board member may subscribe other users to meals, even without their permission and after the deadline has passed.
+        These levels are additive: members are allowed to do anything a "none"-user will, board-members are allowed to do anything a member is, etc. None-users have very limited permissions: they may see some things, and subscribe themselves to a small subset of meals. Members can see most entities and change most resources that they own. Board members have very wide-ranging privileges: they may see and change basically anything. They are also exempt from most business rules: a board member may subscribe other users to meals, even without their permission and after the deadline has passed.
     </p>
 
     <h2>Object ownership</h2>
@@ -40,6 +40,6 @@
         Setting or removing the blocked flag requires board-level permissions: if you are not a board member, you will never be allowed to change this field on yourself or on other users. Whether you can change the diet property, depends on who's diet you're changing: you may set your own diet at any point, but not change other people's diets. Board members can override anyone's diet at their discretion.
     </p>
     <p>
-        Similarly, you can remove a registration from a meal, but only your own. As a member, you cannot unsubscribe other people from meals. You also cannot unsubscribe from the meal when the deadline has passed.
+        In a similar fashion, a member can remove a registration from a meal (as long as the deadline for registration hasn't passed), but only their own registration. In other words, you can undo your own registration upto the deadline, but not those of other people. A board member can remove other people's registrations, both before and after the registration deadline.
     </p>
 @endsection
