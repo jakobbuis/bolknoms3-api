@@ -27,29 +27,32 @@
     <div class="container">
         <div class="columns">
             <nav class="column is-3 menu">
+                <p class="menu-label">
+                    Getting started
+                </p>
                 <ul class="menu-list">
-                    <li><a href="/docs/introduction">Introduction</a></li>
-                    <li><a href="/docs/working-with-oauth">Working with OAuth</a></li>
-                    <li><a href="/docs/authorisation">Authorisation</a></li>
-                    <li><a href="/docs/emails">E-mails</a></li>
+                    @include('docs/_menu', ['path' => 'docs/introduction', 'title' => 'Introduction'])
+                    @include('docs/_menu', ['path' => 'docs/working-with-oauth', 'title' => 'Working with OAuth'])
+                    @include('docs/_menu', ['path' => 'docs/authorisation', 'title' => 'Authorisation'])
+                    @include('docs/_menu', ['path' => 'docs/emails', 'title' => 'E-mails'])
                 </ul>
 
                 <p class="menu-label">
                     Reference
                 </p>
                 <ul class="menu-list">
-                    <li><a href="/docs/meals">Meals</a></li>
-                    <li><a href="/docs/registrations">Registrations</a></li>
-                    <li><a href="/docs/users">Users</a></li>
+                    @include('docs/_menu', ['path' => 'docs/meals', 'title' => 'Meals'])
+                    @include('docs/_menu', ['path' => 'docs/registrations', 'title' => 'Registrations'])
+                    @include('docs/_menu', ['path' => 'docs/users', 'title' => 'Users'])
                 </ul>
 
                 <p class="menu-label">
                     Examples
                 </p>
                 <ul class="menu-list">
-                    <li><a href="/docs/see-all-open-meals">See all open meals</a></li>
-                    <li><a href="/docs/get-the-next-meal">Get the next meal</a></li>
-                    <li><a href="/docs/register-for-a-meal">Register for a meal</a></li>
+                    @include('docs/_menu', ['path' => 'docs/see-all-open-meals', 'title' => 'See all open meals'])
+                    @include('docs/_menu', ['path' => 'docs/get-the-next-meal', 'title' => 'Get the next meal'])
+                    @include('docs/_menu', ['path' => 'docs/register-for-a-meal', 'title' => 'Register for a meal'])
                 </ul>
             </nav>
 
