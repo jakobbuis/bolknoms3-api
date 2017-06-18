@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mail\MealCancelled;
+use App\Mail\MealTimeChanged;
 use App\Models\Meal;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -51,7 +53,34 @@ class MealsController extends Controller
      */
     public function update(Request $request, Meal $meal)
     {
-        //
+        $this->clientMustBeBoard('Only board members can change meals');
+
+        $shouldEmail = false;
+        if (!empty($request->meal_timestamp)) {
+            $meal->meal_timestamp = new Carbon($request->meal_timestamp);
+            $shouldEmail = true;
+        }
+
+        if (!empty($request->registration_close)) {
+            $meal->locked_timestamp = new Carbon($request->registration_close);
+        }
+
+        if (!empty($request->event)) {
+            $meal->event = $request->event;
+        }
+
+        // E-mail all attendees if the meal time of day changes
+        if ($shouldEmail && $meal->isDirty('meal_timestamp')) {
+            // Email and remove all guests
+            $meal->registrations->each(function($registration) use ($meal) {
+                if ($registration->email) {
+                    Mail::send(new MealTimeChanged($meal, $registration));
+                }
+            });
+        }
+
+        $meal->save();
+        return $this->respondWith($meal);
     }
 
     /**
