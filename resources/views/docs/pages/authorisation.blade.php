@@ -18,7 +18,7 @@
         <li><strong>none</strong> All other users</li>
     </ul>
     <p>
-        Normally, your level will be "member". Your authorisation level is retrieved from the Bolklogin OAuth authorisation server (and beyond that, from <a href="http://gosa.i.bolkhuis.nl">Gosa</a>), and cannot be changed in Bolknoms.
+        These levels are additive: members are allowed to do anything a "none"-user will, board-members are allowed to do anything a member is, etc. Normally, your level will be "member". Your authorisation level is retrieved from the <a href="https://auth.debolk.nl">Bolklogin OAuth authorisation server</a> (and beyond that, from <a href="http://gosa.i.bolkhuis.nl">Gosa</a>), and cannot be changed in Bolknoms.
     </p>
     <p class="notification is-warning">
         <strong>Caution:</strong> Bolknoms user levels are similar to
