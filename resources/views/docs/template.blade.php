@@ -31,29 +31,30 @@
                     Getting started
                 </p>
                 <ul class="menu-list">
-                    @include('docs/_menu', ['path' => 'docs/introduction', 'title' => 'Introduction'])
-                    @include('docs/_menu', ['path' => 'docs/working-with-oauth', 'title' => 'Working with OAuth'])
-                    @include('docs/_menu', ['path' => 'docs/authorisation', 'title' => 'Authorisation'])
-                    @include('docs/_menu', ['path' => 'docs/emails', 'title' => 'E-mails'])
-                    @include('docs/_menu', ['path' => 'docs/data-model', 'title' => 'Data model'])
+                    @include('docs/partials/menu', ['path' => 'docs/introduction', 'title' => 'Introduction'])
+                    @include('docs/partials/menu', ['path' => 'docs/working-with-oauth', 'title' => 'Working with OAuth'])
+                    @include('docs/partials/menu', ['path' => 'docs/authorisation', 'title' => 'Authorisation'])
+                    @include('docs/partials/menu', ['path' => 'docs/emails', 'title' => 'E-mails'])
+                    @include('docs/partials/menu', ['path' => 'docs/data-model', 'title' => 'Data model'])
                 </ul>
 
                 <p class="menu-label">
                     Reference
                 </p>
                 <ul class="menu-list">
-                    @include('docs/_menu', ['path' => 'docs/meals', 'title' => 'Meals'])
-                    @include('docs/_menu', ['path' => 'docs/registrations', 'title' => 'Registrations'])
-                    @include('docs/_menu', ['path' => 'docs/users', 'title' => 'Users'])
+                    @include('docs/partials/menu', ['path' => 'docs/meals', 'title' => 'Meals'])
+                    @include('docs/partials/menu', ['path' => 'docs/registrations', 'title' => 'Registrations'])
+                    @include('docs/partials/menu', ['path' => 'docs/users', 'title' => 'Users'])
+                    @include('docs/partials/menu', ['path' => 'docs/errors', 'title' => 'Errors'])
                 </ul>
 
                 <p class="menu-label">
                     Examples
                 </p>
                 <ul class="menu-list">
-                    @include('docs/_menu', ['path' => 'docs/see-all-open-meals', 'title' => 'See all open meals'])
-                    @include('docs/_menu', ['path' => 'docs/get-the-next-meal', 'title' => 'Get the next meal'])
-                    @include('docs/_menu', ['path' => 'docs/register-for-a-meal', 'title' => 'Register for a meal'])
+                    @include('docs/partials/menu', ['path' => 'docs/see-all-open-meals', 'title' => 'See all open meals'])
+                    @include('docs/partials/menu', ['path' => 'docs/get-the-next-meal', 'title' => 'Get the next meal'])
+                    @include('docs/partials/menu', ['path' => 'docs/register-for-a-meal', 'title' => 'Register for a meal'])
                 </ul>
             </nav>
 
