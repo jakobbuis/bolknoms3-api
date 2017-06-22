@@ -22,21 +22,15 @@
     <table class="table is-striped is-narrow">
         <thead><tr>
             <th>E-mail</th>
-            <th>Send when</th>
-            <th>Send to</th>
             <th>Content example</th>
         </tr></thead>
         <tbody>
             <tr>
                 <td>MealCancelled</td>
-                <td>A meal is deleted</td>
-                <td>All registrations with an e-mail address</td>
                 <td>Je hebt je aangemeld op Bolknoms voor de maaltijd van {datum}. Helaas kan de maaltijd niet doorgaan. Je aanmelding is automatisch verwijderd.</td>
             </tr>
             <tr>
                 <td>MealTimeChanged</td>
-                <td>A meal's date or time is changed</td>
-                <td>All registrations with an e-mail address</td>
                 <td>Je hebt je aangemeld op Bolknoms voor de maaltijd van {datum}. Het tijdstip van deze maaltijd is veranderd: de maaltijd begint nu om {tijd} uur.</td>
             </tr>
         </tbody>

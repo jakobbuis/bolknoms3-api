@@ -42,4 +42,10 @@
     <p>
         In a similar fashion, a member can remove a registration from a meal (as long as the deadline for registration hasn't passed), but only their own registration. In other words, you can undo your own registration upto the deadline, but not those of other people. A board member can remove other people's registrations, both before and after the registration deadline.
     </p>
+
+    <h2>Errors</h2>
+    <p>
+        You may encounter these authorisation errors while working with Bolknoms:
+    </p>
+    @include('docs/partials/tables/errors/authorisation')
 @endsection
