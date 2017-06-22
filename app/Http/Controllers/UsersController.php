@@ -48,8 +48,11 @@ class UsersController extends Controller
         // Only board members can (un)block users
         if (isset($request->blocked)) {
             if (!$this->oauth->isBoard()) {
-                throw new ApiError(403, 'oauth_insufficient_authorization',
-                                        'You must be a board member to (un)block a user');
+                throw new ApiError(
+                    403,
+                    'authorization_insufficient_level',
+                    'You must be a board member to (un)block a user'
+                );
             }
             $user->blocked = !!$request->blocked;
         }

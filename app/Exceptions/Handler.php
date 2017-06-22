@@ -53,13 +53,14 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof ApiError) {
             $error = $exception;
-        }
-        elseif ($exception instanceof ModelNotFoundException) {
-            $error = new ApiError(404, 'not_found', "The URL you've tried to access does not exist");
-        }
-        else {
-            $error = new ApiError(500, 'internal_server_error',
-                    'An error occured while processing your request. A more specific error message is not available.');
+        } elseif ($exception instanceof ModelNotFoundException) {
+            $error = new ApiError(404, 'object_nonexistent', "The URL you've tried to access does not exist");
+        } else {
+            $error = new ApiError(
+                500,
+                'internal_server_error',
+                'An error occured while processing your request. A more specific error message is not available.'
+            );
         }
 
         return response()->json($error->format(), $error->httpStatus());

@@ -39,8 +39,7 @@ class Controller extends BaseController
         if ($data instanceof \Illuminate\Database\Eloquent\Collection) {
             $transformer = $data->first()->getTransformer();
             $resource = new \League\Fractal\Resource\Collection($data, $transformer);
-        }
-        else {
+        } else {
             $transformer = $data->getTransformer();
             $resource = new Item($data, $transformer);
         }
@@ -55,10 +54,10 @@ class Controller extends BaseController
      * @param  string $explanation optional, appropriate explanation in case of denial
      * @throws ApiError when denied
      */
-    public function clientMustBeMember($explanation =  'You must be a member to do this')
+    public function clientMustBeMember($explanation = 'You must be a member to do this')
     {
         if (!$this->oauth->isMember()) {
-            throw new ApiError(403, 'oauth_insufficient_authorization', $explanation);
+            throw new ApiError(403, 'authorization_insufficient_level', $explanation);
         }
     }
 
@@ -70,7 +69,7 @@ class Controller extends BaseController
     public function clientMustBeBoard($explanation = 'You must be a board member to do this')
     {
         if (!$this->oauth->isBoard()) {
-            throw new ApiError(403, 'oauth_insufficient_authorization', $explanation);
+            throw new ApiError(403, 'authorization_insufficient_level', $explanation);
         }
     }
 
@@ -82,7 +81,7 @@ class Controller extends BaseController
      */
     public function clientMustOwn($model, $explanation = 'You do not own this object')
     {
-        $error = new ApiError(403, 'oauth_insufficient_authorization', $explanation);
+        $error = new ApiError(403, 'authorization_not_owner', $explanation);
 
         // Board members effectively own everything
         if ($this->oauth->isBoard()) {
@@ -100,8 +99,7 @@ class Controller extends BaseController
             if ($model->id === $currentUser->id) {
                 return;
             }
-        }
-        else {
+        } else {
             // Ownership is set through the user() relationship, which must exist
             if (!method_exists($model, 'user')) {
                 throw new \Exception("$model cannot be owned by a user, i.e. it has no user() relationship");
