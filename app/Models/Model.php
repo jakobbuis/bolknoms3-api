@@ -17,7 +17,7 @@ abstract class Model extends \Illuminate\Database\Eloquent\Model
      * The appropriate Fractal Transformer for this model
      * @return \League\Fractal\TransformerAbstract
      */
-    abstract function getTransformer();
+    abstract public function getTransformer();
 
     /*
      * Models use UUIDs for the their primary key

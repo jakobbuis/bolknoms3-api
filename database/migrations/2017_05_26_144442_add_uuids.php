@@ -16,15 +16,15 @@ class AddUuids extends Migration
     public function up()
     {
         // Create new columns for the keys, and drop all foreign keys
-        Schema::table('users', function(Blueprint $table){
+        Schema::table('users', function (Blueprint $table) {
             $table->char('id_new', 36)->nullable();
         });
 
-        Schema::table('meals', function(Blueprint $table){
+        Schema::table('meals', function (Blueprint $table) {
             $table->char('id_new', 36)->nullable();
         });
 
-        Schema::table('registrations', function(Blueprint $table){
+        Schema::table('registrations', function (Blueprint $table) {
             $table->char('id_new', 36)->nullable();
             $table->char('meal_id_new', 36)->nullable();
             $table->char('user_id_new', 36)->nullable();
@@ -45,17 +45,17 @@ class AddUuids extends Migration
         DB::unprepared('UPDATE registrations LEFT JOIN users ON registrations.created_by = users.id SET created_by_new = users.id_new');
 
         // Drop old columns, rename columns
-        Schema::table('users', function(Blueprint $table){
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('id');
             $table->renameColumn('id_new', 'id');
         });
 
-        Schema::table('meals', function(Blueprint $table){
+        Schema::table('meals', function (Blueprint $table) {
             $table->dropColumn('id');
             $table->renameColumn('id_new', 'id');
         });
 
-        Schema::table('registrations', function(Blueprint $table){
+        Schema::table('registrations', function (Blueprint $table) {
             $table->dropColumn('id');
             $table->renameColumn('id_new', 'id');
 
@@ -81,7 +81,7 @@ class AddUuids extends Migration
         DB::unprepared("ALTER TABLE `registrations` ADD PRIMARY KEY(`id`);");
 
         // Reinstate foreign key constraints
-        Schema::table('registrations', function(Blueprint $table) {
+        Schema::table('registrations', function (Blueprint $table) {
             $table->foreign('meal_id')->references('id')->on('meals');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('created_by')->references('id')->on('users');

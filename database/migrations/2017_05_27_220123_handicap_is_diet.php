@@ -13,11 +13,11 @@ class HandicapIsDiet extends Migration
      */
     public function up()
     {
-        Schema::table('registrations', function(Blueprint $table){
+        Schema::table('registrations', function (Blueprint $table) {
             $table->renameColumn('handicap', 'diet');
         });
 
-        Schema::table('users', function(Blueprint $table){
+        Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('handicap', 'diet');
         });
     }
@@ -29,11 +29,11 @@ class HandicapIsDiet extends Migration
      */
     public function down()
     {
-        Schema::table('registrations', function(Blueprint $table){
+        Schema::table('registrations', function (Blueprint $table) {
             $table->renameColumn('diet', 'handicap');
         });
 
-        Schema::table('users', function(Blueprint $table){
+        Schema::table('users', function (Blueprint $table) {
             $table->renameColumn('diet', 'handicap');
         });
     }

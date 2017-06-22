@@ -29,7 +29,7 @@ class Meal extends Model
      */
     public function scopeAvailable($query)
     {
-        return $query->where(function($q){
+        return $query->where(function ($q) {
             $q->whereRaw('locked_timestamp > NOW()');
         })->orderBy('meal_timestamp');
     }
@@ -56,7 +56,7 @@ class Meal extends Model
      */
     public function open_for_registrations()
     {
-      return $this->locked_timestamp->timestamp > time();
+        return $this->locked_timestamp->timestamp > time();
     }
 
     /**

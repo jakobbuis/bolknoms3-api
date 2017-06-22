@@ -72,7 +72,7 @@ class MealsController extends Controller
         // E-mail all attendees if the meal time of day changes
         if ($shouldEmail && $meal->isDirty('meal_timestamp')) {
             // Email and remove all guests
-            $meal->registrations->each(function($registration) use ($meal) {
+            $meal->registrations->each(function ($registration) use ($meal) {
                 if ($registration->email) {
                     Mail::send(new MealTimeChanged($meal, $registration));
                 }
@@ -94,7 +94,7 @@ class MealsController extends Controller
         $this->clientMustBeBoard('Only board members can remove meals');
 
         // Email and remove all guests
-        $meal->registrations->each(function($registration) use ($meal) {
+        $meal->registrations->each(function ($registration) use ($meal) {
             if ($registration->email) {
                 Mail::send(new MealCancelled($meal, $registration));
             }

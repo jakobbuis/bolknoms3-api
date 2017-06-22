@@ -13,7 +13,7 @@ class SaltIsConfirmationCode extends Migration
      */
     public function up()
     {
-        Schema::table('registrations', function(Blueprint $table){
+        Schema::table('registrations', function (Blueprint $table) {
             $table->renameColumn('salt', 'confirmation_code');
         });
     }
@@ -25,7 +25,7 @@ class SaltIsConfirmationCode extends Migration
      */
     public function down()
     {
-        Schema::table('registrations', function(Blueprint $table){
+        Schema::table('registrations', function (Blueprint $table) {
             $table->renameColumn('confirmation_code', 'salt');
         });
     }

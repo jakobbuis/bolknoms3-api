@@ -16,7 +16,7 @@ class RemoveObsoletePromotedColumn extends Migration
         // Move the data to the event column
         DB::unprepared("UPDATE meals SET event = 'evenement' WHERE event IS NULL AND promoted = 1");
 
-        Schema::table('meals', function(Blueprint $table){
+        Schema::table('meals', function (Blueprint $table) {
             $table->dropColumn('promoted');
         });
     }
@@ -28,7 +28,7 @@ class RemoveObsoletePromotedColumn extends Migration
      */
     public function down()
     {
-        Schema::table('meals', function(Blueprint $table){
+        Schema::table('meals', function (Blueprint $table) {
             $table->boolean('promoted');
         });
     }

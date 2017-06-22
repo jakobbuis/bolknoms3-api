@@ -45,7 +45,7 @@ class FixDateColumns extends Migration
         // Fix the date column of every table to have a suitable default
         $tables = ['users', 'meals', 'registrations'];
         foreach ($tables as $tableName) {
-            Schema::table($tableName, function(Blueprint $table) use ($tableName) {
+            Schema::table($tableName, function (Blueprint $table) use ($tableName) {
                 $table->datetime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->change();
                 $table->datetime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'))->change();
                 $table->datetime('deleted_at')->default(null)->change();
