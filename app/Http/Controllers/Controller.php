@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\OAuth;
 use App\Models\User;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -110,5 +111,23 @@ class Controller extends BaseController
         }
 
         throw $error;
+    }
+
+    /**
+     * Format a bag of validation messages into the standard error response
+     * @param  \Illuminate\Contracts\Validation\Validator $validator
+     * @return Illuminate\Http\Response
+     */
+    public function formatValidationErrors(Validator $validator)
+    {
+        $errors = collect($validator->errors()->all())->map(function ($error) {
+            return [
+                'code' => 'validation_error',
+                'description' => $error,
+                'href' => env('ERROR_DOCS_URL') . 'validation_error',
+            ];
+        });
+
+        return response()->json(['errors' => $errors], 400);
     }
 }
