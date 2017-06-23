@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class MealsController extends Controller
 {
@@ -30,7 +31,23 @@ class MealsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->clientMustBeBoard('Only board members can create meals');
+
+        $validator = Validator::make($request->all(), [
+            'meal_timestamp' => ['iso_8601_date', 'required', 'after:now', 'unique:meals'],
+            'registration_close' => ['iso_8601_date', 'required', 'after:now', 'before:meal_timestamp'],
+            'event' => ['string', 'max:255'],
+        ]);
+        if ($validator->fails()) {
+            return $this->formatValidationErrors($validator);
+        }
+
+
+        return Meal::create([
+            'meal_timestamp' => new Carbon($request->meal_timestamp),
+            'locked_timestamp' => new Carbon($request->registration_close),
+            'event' => $request->event,
+        ]);
     }
 
     /**
