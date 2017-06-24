@@ -42,7 +42,6 @@ class MealsController extends Controller
             return $this->formatValidationErrors($validator);
         }
 
-
         return Meal::create([
             'meal_timestamp' => new Carbon($request->meal_timestamp),
             'locked_timestamp' => new Carbon($request->registration_close),
