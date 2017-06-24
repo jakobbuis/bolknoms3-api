@@ -45,4 +45,14 @@ class User extends Model
     {
         return $this->registrations()->where(['meal_id' => $meal->id])->first();
     }
+
+    /**
+     * All blocked users from the system
+     * @param  Illuminate\Database\Eloquent\Builder $query
+     * @return Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBlocked($query)
+    {
+        return $query->where('blocked', true);
+    }
 }

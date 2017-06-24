@@ -60,4 +60,13 @@ class UsersController extends Controller
         $user->save();
         return $this->respondWith($user);
     }
+
+    /**
+     * Returns a list of all blocked users
+     * @return Illuminate\Http\Response
+     */
+    public function blocked()
+    {
+        return $this->respondWith(User::blocked()->get());
+    }
 }
