@@ -32,6 +32,7 @@
                 </p>
                 <ul class="menu-list">
                     @include('docs/partials/menu', ['path' => 'docs/introduction', 'title' => 'Introduction'])
+                    @include('docs/partials/menu', ['path' => 'docs/communication', 'title' => 'Communication'])
                     @include('docs/partials/menu', ['path' => 'docs/working-with-oauth', 'title' => 'Working with OAuth'])
                     @include('docs/partials/menu', ['path' => 'docs/authorisation', 'title' => 'Authorisation'])
                     @include('docs/partials/menu', ['path' => 'docs/emails', 'title' => 'E-mails'])
