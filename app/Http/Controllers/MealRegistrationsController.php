@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Registration;
+use App\Exceptions\ApiError;
 use App\Models\Meal;
+use App\Models\Registration;
 use Illuminate\Http\Request;
 
 class MealRegistrationsController extends Controller
@@ -40,6 +41,13 @@ class MealRegistrationsController extends Controller
      */
     public function show(Meal $meal, Registration $registration)
     {
+        if ($registration->meal_id !== $meal->id) {
+            throw new ApiError(
+                400,
+                'relationship_mismatch',
+                'This registration does not relate to this meal. It belongs to ' . $registration->meal_id
+            );
+        }
         return $this->respondWith($registration);
     }
 

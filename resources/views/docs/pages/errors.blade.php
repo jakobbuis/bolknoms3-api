@@ -37,6 +37,9 @@
     <h3>Authorisation errors</h3>
     @include('docs/partials/tables/errors/authorisation')
 
+    <h3>Resource-specific errors</h3>
+    @include('docs/partials/tables/errors/resource')
+
     <h3>General errors</h3>
     @include('docs/partials/tables/errors/general')
 
