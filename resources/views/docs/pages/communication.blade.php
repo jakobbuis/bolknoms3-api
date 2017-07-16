@@ -16,7 +16,7 @@
         This is a proper REST API and supports <a href="https://en.wikipedia.org/wiki/HATEOAS">HATEOAS</a>. You should never generate URLs to resources yourself. Use the urls provided in the <code>links</code> property on every response.
     </p>
 
-    <h2>Including relationships</h2>
+    <h2 id="including-relationships">Including relationships</h2>
     <p>
         All endpoints support an <code>include</code> query parameter. You can use this parameter to include related resources into the response. This makes certain scenarios more efficient as you require less HTTP requests to populate a view.
     </p>
