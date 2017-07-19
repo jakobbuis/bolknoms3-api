@@ -15,7 +15,7 @@ class DocsController extends Controller
     {
         $path = "docs/pages/{$slug}";
         if (!View::exists($path)) {
-            abort(404);
+            return response()->view('docs/404', [], 404);
         }
 
         return view($path);
