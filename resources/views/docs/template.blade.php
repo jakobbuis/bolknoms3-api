@@ -46,6 +46,7 @@
                     @include('docs/partials/menu', ['path' => 'docs/meals', 'title' => 'Meals'])
                     @include('docs/partials/menu', ['path' => 'docs/registrations', 'title' => 'Registrations'])
                     @include('docs/partials/menu', ['path' => 'docs/users', 'title' => 'Users'])
+                    @include('docs/partials/menu', ['path' => 'docs/rules', 'title' => 'Rules'])
                     @include('docs/partials/menu', ['path' => 'docs/errors', 'title' => 'Errors'])
                 </ul>
 
