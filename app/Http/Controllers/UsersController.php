@@ -44,6 +44,19 @@ class UsersController extends Controller
     }
 
     /**
+     * Update the current users details
+     */
+    public function updateMe(Request $request)
+    {
+        $user = $this->oauth->user();
+        if (!$user) {
+            throw new ApiError(500, 'user_missing', 'You do not have a user account');
+        }
+
+        return $this->update($request, $user);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

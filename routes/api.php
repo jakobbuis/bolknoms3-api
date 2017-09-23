@@ -3,6 +3,7 @@
 // Custom routes for convenience
 Route::get('/users/blocked', 'UsersController@blocked');
 Route::get('/users/me', 'UsersController@me');
+Route::patch('/users/me', 'UsersController@updateMe');
 
 // Basis resources
 Route::resource('meals', 'MealsController', ['except' => ['create', 'edit']]);
