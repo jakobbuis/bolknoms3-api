@@ -19,6 +19,20 @@ class UsersController extends Controller
     }
 
     /**
+     * The details of the current user of the token
+     * @return \Illuminate\Http\Response
+     */
+    public function me()
+    {
+        $user = $this->oauth->user();
+        if (!$user) {
+            throw new ApiError(500, 'user_missing', 'You do not have a user account');
+        }
+
+        return $this->respondWith($user);
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\User  $user
