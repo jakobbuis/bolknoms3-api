@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Meal;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class GenerateMeals extends Command
 {
