@@ -38,6 +38,11 @@ class Controller extends BaseController
     protected function respondWith($data)
     {
         if ($data instanceof \Illuminate\Database\Eloquent\Collection) {
+            // Return an empty array for empty collections
+            if ($data->count() === 0) {
+                return response([], 200);
+            }
+
             $transformer = $data->first()->getTransformer();
             $resource = new \League\Fractal\Resource\Collection($data, $transformer);
         } else {
