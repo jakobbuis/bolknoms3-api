@@ -122,4 +122,19 @@ class MealsController extends Controller
 
         return response(null, 204);
     }
+
+    public function today()
+    {
+        return $this->respondWith(Meal::today()->get());
+    }
+
+    public function upcoming()
+    {
+        return $this->respondWith(Meal::upcoming()->get());
+    }
+
+    public function available()
+    {
+        return $this->respondWith(Meal::available()->get());
+    }
 }
