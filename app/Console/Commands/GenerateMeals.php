@@ -24,7 +24,7 @@ class GenerateMeals extends Command
                     'meal_timestamp' => $current_date.' 18:30:00',
                     'locked_timestamp' => $current_date.' 15:00:00',
                 ]);
-                Log::info("Generated meal for {$current_date}", $meal);
+                Log::info("Generated meal for {$current_date}");
             } else {
                 Log::info("Skipped generating meal for {$current_date}, a meal exists for this date");
             }
