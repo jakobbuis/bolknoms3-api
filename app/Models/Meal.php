@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Transformers\MealTransformer;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Meal extends Model
 {
