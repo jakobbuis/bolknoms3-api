@@ -31,7 +31,7 @@ class RulesController extends Controller
                     'title' => 'Betalen',
                     'rules' => [
                         'Je betaalt de maaltijd met een bonnetje. Die kun je kopen in de sociëteit.',
-                        'Als je niet op tijd afmeldt en niet komt opdagen, moet je wel voor de maaltijd betalen (meestal &euro;3,50). Er is immers wel voor je gekookt. Voor leden gaat dat op Bolkrekening, externen krijgen een factuur gemaild.',
+                        'Als je niet op tijd afmeldt en niet komt opdagen, moet je wel voor de maaltijd betalen (meestal €3,50). Er is immers wel voor je gekookt. Voor leden gaat dat op Bolkrekening, externen krijgen een factuur gemaild.',
                     ]
                 ],
             ]
