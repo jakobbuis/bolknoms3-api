@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ApiError;
 use App\Http\OAuth;
 use App\Models\User;
 use Illuminate\Contracts\Validation\Validator;
