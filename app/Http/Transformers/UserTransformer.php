@@ -13,7 +13,7 @@ class UserTransformer extends \League\Fractal\TransformerAbstract
         return [
             'id' => $user->id,
             'username' => $user->username,
-            'diet' => $user->handicap,
+            'diet' => $user->diet,
             'name' => $user->name,
             'blocked' => $user->blocked,
         ];
